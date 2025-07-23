@@ -1,0 +1,13 @@
+includes:
+  - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+parameters:
+  strictRules:
+    allRules: true
+  level: max
+  parallel:
+    processTimeout: 300.0
+    jobSize: 60
+    minimumNumberOfJobsPerProcess: 5
+  tmpDir: cache/phpstan
+  paths:
+      - src/
