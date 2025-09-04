@@ -1,8 +1,8 @@
 <?php
 
-namespace Freyr\Offer\Offer\Generator\Application;
+namespace Freyr\Offer\Generator\Application;
 
-use Freyr\Offer\Offer\Generator\DomainModel\PrepareOfferFromAdvert;
+use Freyr\Offer\Generator\DomainModel\PrepareOfferFromAdvert;
 
 class PrepareOfferFromAdvertHandler
 {
@@ -12,6 +12,7 @@ class PrepareOfferFromAdvertHandler
         $advert = $this->advertRepository->getById($command->advertId);
 
         $offer = $this->offerGenerator->prepareOfferFromAdvert($advert, $command);
+
         $this->offerRepository->save($offer);
         $this->bus->dispatch(new OfferForAdvertWasPrepared());
     }
