@@ -1,8 +1,8 @@
 <?php
 
-namespace Freyr\Offer\Generator\Application;
+namespace Freyr\Offer\Offer\Generator\Application;
 
-use Freyr\Offer\Generator\DomainModel\PrepareOfferFromAdvert;
+use Freyr\Offer\Offer\Generator\DomainModel\PrepareOfferFromAdvert;
 
 class PrepareOfferFromAdvertHandler
 {

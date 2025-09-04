@@ -1,6 +1,6 @@
 <?php
 
-namespace Freyr\Offer\Generator\Application;
+namespace Freyr\Offer\Offer\Generator\Application;
 
 class CheckForResponsesHandler
 {

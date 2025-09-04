@@ -1,6 +1,6 @@
 <?php
 
-namespace Freyr\Offer\Generator\DomainModel;
+namespace Freyr\Offer\Offer\Generator\DomainModel;
 
 class Aggregate
 {
