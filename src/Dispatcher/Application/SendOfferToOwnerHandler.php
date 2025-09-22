@@ -11,7 +11,11 @@ class SendOfferToOwnerHandler
             // dispatcher
             $response = $this->dispatcherStrategy->sent($offer);
 
-            $this->bus->dispatch(new OfferWasSentToOwner());
+            $this->outbox->dispatch(new OfferWasSentToOwner(paylod: $response->toArray()));
+
+            $this->outbox->dispatch(new OfferShouldBeSentAsMessage(paylod: $response->toArray()));
+            $this->outbox->dispatch(new OfferShouldBeWasSent(paylod: $response->toArray()));
+
             $offer->sentBy($response);
             $this->offerRepository->save($offer);
         }
