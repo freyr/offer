@@ -2,23 +2,33 @@
 
 namespace Freyr\Offer\Dispatcher\Application;
 
+use Freyr\Offer\Dispatcher\DomainModel\DispatcherStrategy;
+use Freyr\Offer\Dispatcher\DomainModel\TemplateRepository;
+
 class SendOfferToOwnerHandler
 {
+
+    public function __construct(
+        private TemplateRepository $templateRepository,
+        private DispatcherStrategy $dispatcherStrategy,
+    )
+    {
+
+    }
+
     public function __invoke(OfferForAdvertWasPrepared $message): void
     {
-        $offer = $this->offerRepository->getBy($message->offerId);
-        if ($offer->canBeSentToOwner()) {
-            // dispatcher
-            $response = $this->dispatcherStrategy->sent($offer);
+        $template = $this->templateRepository->getBy($message->templateId);
+        $offerContent = $message->offerContent;
+        $messageContent = $this->templateRenderer->render($template, $offerContent);
+        $recipient = new Recipient(
+            $message->ownerId,
+            $message->targetPlatformId,
+            $message->targetPlatform,
+        );
 
-            $this->outbox->dispatch(new OfferWasSentToOwner(paylod: $response->toArray()));
-
-            $this->outbox->dispatch(new OfferShouldBeSentAsMessage(paylod: $response->toArray()));
-            $this->outbox->dispatch(new OfferShouldBeWasSent(paylod: $response->toArray()));
-
-            $offer->sentBy($response);
-            $this->offerRepository->save($offer);
-        }
+        $response = $this->dispatcherStrategy->sent($messageContent, $recipient);
+        $this->bus->dispatch(new OfferWasSentToOwner(paylod: $response->toArray()));
     }
 
 }
