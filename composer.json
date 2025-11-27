@@ -12,7 +12,8 @@
   "require": {
     "php": ">=8.4.0",
     "ext-json": "*",
-    "freyr/identity": "^0.1.1"
+    "freyr/identity": "^0.1.1",
+    "ext-redis": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^12.0",
