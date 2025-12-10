@@ -3,13 +3,14 @@
 namespace Freyr\Offer\Dispatcher\Application;
 
 use Freyr\Offer\Dispatcher\DomainModel\DispatcherStrategy;
+use Freyr\Offer\Dispatcher\DomainModel\TemplateReadModelRepository;
 use Freyr\Offer\Dispatcher\DomainModel\TemplateRepository;
 
 class SendOfferToOwnerHandler
 {
 
     public function __construct(
-        private TemplateRepository $templateRepository,
+        private TemplateReadModelRepository $templateRepository,
         private DispatcherStrategy $dispatcherStrategy,
     )
     {

@@ -7,10 +7,11 @@ namespace Freyr\Offer\Dispatcher\Infrastructure;
 use Freyr\Offer\Dispatcher\Application\Template\TemplateCreatedMessage;
 use Freyr\Offer\Dispatcher\Application\Template\TemplateRemovedMessage;
 use Freyr\Offer\Dispatcher\Application\Template\TemplateUpdateMessage;
+use Freyr\Offer\Dispatcher\DomainModel\TemplateReadModelRepository;
 use Freyr\Offer\Dispatcher\DomainModel\TemplateRepository;
 use Redis;
 
-class TemplateReadModelRepository implements TemplateRepository
+readonly class TemplateRedisRepository implements TemplateRepository, TemplateReadModelRepository
 {
     public function __construct(private Redis $redis) {}
     public function getBy(string $templateId): string
