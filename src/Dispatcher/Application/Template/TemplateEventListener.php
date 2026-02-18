@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Freyr\Offer\Dispatcher\Application\Template;
 
-
-
 use Freyr\Offer\Dispatcher\DomainModel\TemplateRepository;
 
 #[AsMessageHandler]
@@ -13,9 +11,7 @@ class TemplateEventListener
 {
     public function __construct(
         private TemplateRepository $templateRepository
-    )
-    {
-
+    ) {
     }
     public function __invoke(TemplateChangeMessage $message): void
     {
@@ -41,7 +37,4 @@ class TemplateEventListener
     {
         $this->templateRepository->remove($message);
     }
-
-
-
 }

@@ -4,17 +4,13 @@ namespace Freyr\Offer\Dispatcher\Application;
 
 use Freyr\Offer\Dispatcher\DomainModel\DispatcherStrategy;
 use Freyr\Offer\Dispatcher\DomainModel\TemplateReadModelRepository;
-use Freyr\Offer\Dispatcher\DomainModel\TemplateRepository;
 
 class SendOfferToOwnerHandler
 {
-
     public function __construct(
         private TemplateReadModelRepository $templateRepository,
         private DispatcherStrategy $dispatcherStrategy,
-    )
-    {
-
+    ) {
     }
 
     public function __invoke(OfferForAdvertWasPrepared $message): void
@@ -30,6 +26,8 @@ class SendOfferToOwnerHandler
 
         $response = $this->dispatcherStrategy->sent($messageContent, $recipient);
         $this->bus->dispatch(new OfferWasSentToOwner(paylod: $response->toArray()));
-    }
 
+
+        $this->bus->dispatch(new OfferFail(paylod: $response->toArray()));
+    }
 }

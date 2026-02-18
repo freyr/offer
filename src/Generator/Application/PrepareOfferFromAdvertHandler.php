@@ -6,7 +6,6 @@ use Freyr\Offer\Generator\DomainModel\PrepareOfferFromAdvert;
 
 class PrepareOfferFromAdvertHandler
 {
-
     public function __invoke(PrepareOfferFromAdvert $command): void
     {
         $advert = $this->advertRepository->getById($command->advertId);
@@ -14,6 +13,7 @@ class PrepareOfferFromAdvertHandler
         $offer = $this->offerGenerator->prepareOfferFromAdvert($advert, $command);
 
         $this->offerRepository->save($offer);
+
         $this->bus->dispatch(new OfferForAdvertWasPrepared());
     }
 }

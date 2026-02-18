@@ -13,7 +13,9 @@ use Redis;
 
 readonly class TemplateRedisRepository implements TemplateRepository, TemplateReadModelRepository
 {
-    public function __construct(private Redis $redis) {}
+    public function __construct(private Redis $redis)
+    {
+    }
     public function getBy(string $templateId): string
     {
         return $this->redis->get($templateId);

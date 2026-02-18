@@ -6,10 +6,9 @@ namespace Freyr\Offer\MessageIO\Application;
 
 use Freyr\Offer\MessageIO\DomainModel\Message;
 
-class MessageWriterHandler {
-
+class MessageWriterHandler
+{
     public function __invoke(Message $message)
     {
-
     }
 }

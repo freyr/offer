@@ -6,7 +6,6 @@ namespace Freyr\Offer\MessageIO\DomainModel;
 
 class Message
 {
-
     public function __construct(
         public string $id,
         public string $message,
@@ -14,7 +13,6 @@ class Message
         public Protocol $type,
         public Sender $sender,
         public Receiver $receiver,
-    )
-    {
+    ) {
     }
 }

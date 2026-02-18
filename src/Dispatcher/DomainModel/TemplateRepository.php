@@ -8,8 +8,8 @@ use Freyr\Offer\Dispatcher\Application\Template\TemplateCreatedMessage;
 use Freyr\Offer\Dispatcher\Application\Template\TemplateRemovedMessage;
 use Freyr\Offer\Dispatcher\Application\Template\TemplateUpdateMessage;
 
-interface TemplateRepository {
-
+interface TemplateRepository
+{
     public function update(TemplateUpdateMessage $message): void;
 
     public function insert(TemplateCreatedMessage $message): void;
